@@ -57,7 +57,6 @@ public class MapService {
     String url =
         "https://maps.googleapis.com/maps/api/staticmap?center=" + city + "," + streetAddress + 
          "," + state +"&zoom="+zoomLevel+
-        
         "&size=640x480&markers=size:mid%7Ccolor:red%7C"+city+","+streetAddress+"," + state +
         "&key=" + appid ;
     return url;
