@@ -25,7 +25,7 @@ public class Places {
     new SelectItem("8"),
     new SelectItem("9"),
     new SelectItem("10"),
-    new SelectItem("11")
+    new SelectItem("11"),
  };
   
   public void addPlace(String streetAddress, 

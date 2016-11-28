@@ -27,19 +27,19 @@ public class MapService {
     boolean cannotAccessWebService = false;
     
     for (int i=1; i <= urls.length; ++i) {
-      Document document = getMapDocumentFromWebService(
+      String document = getMapDocumentFromWebService(
           streetAddress, city, state, APPID, i);
       
       if (document == null) {
         cannotAccessWebService = true;
         break;
       }
-      urls[i-1] = getMapUrlFromDocument(document);
+      urls[i-1] = document;
     }
     
     if (cannotAccessWebService) {
       for (int i=1; i <= urls.length; ++i) {
-        urls[i-1] = "images/maps/map-" + i + ".png";
+        urls[i-1] = "images/maps/map-" + i + ".jpeg";
       }      
     }
     return urls;
@@ -51,17 +51,16 @@ public class MapService {
     Element mapUrl = (Element) result.item(0);
     return mapUrl.getFirstChild().getNodeValue();
   }
-  private Document getMapDocumentFromWebService(
+  private String getMapDocumentFromWebService(
       String streetAddress, String city, String state,
       String appid, int zoomLevel) {
     String url =
-        "http://api.local.yahoo.com/MapsService/V1"
-            + "/mapImage?appid=" + appid + "&street="
-            + encode(streetAddress) + "&city=" + city
-            + "&state=" + state + "&image_width=300"
-            + "&image_height=300"
-            + "&zoom=" + zoomLevel;
-    return getDocumentFromUrl(url);
+        "https://maps.googleapis.com/maps/api/staticmap?center=" + city + "," + streetAddress + 
+         "," + state +"&zoom="+zoomLevel+
+        
+        "&size=640x480&markers=size:mid%7Ccolor:red%7C"+city+","+streetAddress+"," + state +
+        "&key=" + appid ;
+    return url;
   }
   private Document getDocumentFromUrl(String url) {
     HttpClient client = new HttpClient();

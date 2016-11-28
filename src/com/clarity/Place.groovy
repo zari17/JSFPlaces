@@ -13,10 +13,10 @@ import java.util.ArrayList
 @RequestScoped
 
 public class Place { 
-  String streetAddress = "29419 112th Ave SE",
-         city = "Auburn", 
-  		 state = "WA",
-  		 zip = "98001",
+  String streetAddress = "Warszawska",
+         city = "Bielsko-Biala", 
+  		 state = "180",
+  		 zip = "",
   		 weather = null 
   
   String[] mapUrls = null
@@ -52,7 +52,7 @@ public class Place {
 	WeatherService ws = elResolver.getValue(
 	              fc.getELContext(), null, "weatherService1");
 
-	weather = ws.getWeatherForZip(zip, true)
+	weather = ws.getWeatherForZip(city, true)
 	
 	places.addPlace(streetAddress, city, state, mapUrls, weather)
 
